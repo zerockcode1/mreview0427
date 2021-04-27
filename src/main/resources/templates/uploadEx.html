@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Upload Example....</h1>
+
+  <input type="file" name="uploadFiles" multiple>
+  <button class="uploadBtn">Upload</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+
+      document.querySelector(".uploadBtn").addEventListener("click", function(){
+
+          const formData = new FormData();
+          const inputFile = document.querySelector("input[type='file']");
+
+          console.dir(inputFile);
+
+          const files = inputFile.files;
+
+          for(let i = 0; i < files.length; i++){
+              formData.append("uploadFiles",files[i]);
+          }
+
+          const headers = {headers:{'Content-Type': 'multipart/form-data'}}
+
+          axios.post('/uploadAjax', formData, headers)
+              .then((response) => {
+                  // 응답 처리
+              })
+              .catch((error) => {
+                  // 예외 처리
+              })
+
+
+
+      },false);
+
+  </script>
+
+
+</body>
+</html>
